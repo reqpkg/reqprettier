@@ -85,14 +85,14 @@ Automatically sorts HTML attributes in a consistent order (class, id, data-\*, a
 
 ### Vue Template Support
 
-Handles Vue directives (v-bind, v-on, v-model, etc.) automatically. Vue directives come first.
+Handles Vue directives (v-bind, v-on, v-model, etc.) automatically. Vue directives come first, event handlers (@, v-on:) last.
 
 **Before:**
 
 ```text
 <template>
   <div id="app" v-if="show" class="app" @click="handleClick" :data="myData">
-    <input type="text" v-model="value" class="input" id="userInput" />
+    <input type="text" v-model="value" class="input" id="userInput" @input="handleInput" />
   </div>
 </template>
 ```
@@ -101,8 +101,8 @@ Handles Vue directives (v-bind, v-on, v-model, etc.) automatically. Vue directiv
 
 ```vue
 <template>
-  <div v-if="show" :data="myData" @click="handleClick" class="app" id="app">
-    <input v-model="value" class="input" id="userInput" type="text" />
+  <div v-if="show" :data="myData" class="app" id="app" @click="handleClick">
+    <input v-model="value" class="input" id="userInput" type="text" @input="handleInput" />
   </div>
 </template>
 ```

@@ -228,7 +228,7 @@ describe('HTML Attribute Sorting', () => {
     })
 
     expect(output).toBe(
-      `<template>\n  <div v-on:click="handler" v-bind:value="val" class="class" id="id" other="other"></div>\n</template>\n`,
+      `<template>\n  <div v-bind:value="val" class="class" id="id" other="other" v-on:click="handler"></div>\n</template>\n`,
     )
   })
 })
