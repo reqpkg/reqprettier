@@ -1,15 +1,6 @@
 # ✨ reqprettier
 
-[Prettier](https://prettier.io) with fully customised configuration for use in any project. Don't hesitate and get your project up and running quickly with Prettier ready.
-
-- [✨ reqprettier](#-reqprettier)
-  - [How to use](#how-to-use)
-    - [Dependency installation](#dependency-installation)
-    - [Enabling the configuration](#enabling-the-configuration)
-      - [1) Via `package.json`.](#1-via-packagejson)
-      - [2) Or you can customise the configuration](#2-or-you-can-customise-the-configuration)
-  - [Examples](#examples)
-    - [Javascript](#javascript)
+[Prettier](https://prettier.io) with production-ready configuration and automatic import organization for modern JavaScript and TypeScript projects.
 
 ## How to use
 
@@ -52,10 +43,10 @@ export default {
 
 ## Examples
 
-### Javascript
+### Javascript/TypeScript
 
-1. Format code
-2. Sorts and separates imports
+1. Formats code consistently
+2. Organizes and sorts imports automatically
 
 <table width="100%">
   <thead>
@@ -71,3 +62,4 @@ export default {
     </td>
   </tbody>
 </table>
+

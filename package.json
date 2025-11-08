@@ -1,7 +1,7 @@
 {
   "name": "reqprettier",
-  "version": "1.0.19",
-  "description": "✨ Prettier with a great default configuration",
+  "version": "2.0.0",
+  "description": "✨ Prettier with a production-ready configuration and automatic import organization",
   "main": "prettier.config.js",
   "types": "./index.d.ts",
   "files": [
@@ -10,7 +10,9 @@
   ],
   "type": "module",
   "scripts": {
-    "format": "prettier --write . --config ./prettier.config.js"
+    "format": "prettier --write . --config ./prettier.config.js",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "author": {
     "name": "strikebu77",
@@ -23,11 +25,22 @@
   },
   "keywords": [
     "prettier",
-    "format"
+    "format",
+    "formatter",
+    "code-style",
+    "organize-imports",
+    "import-sort",
+    "prettier-config",
+    "typescript",
+    "javascript"
   ],
   "license": "MIT",
   "dependencies": {
-    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
-    "prettier": "^3.1.1"
+    "prettier": "^3.3.3",
+    "prettier-plugin-organize-imports": "^4.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.0",
+    "vitest": "^4.0.8"
   }
 }

@@ -1,21 +1,13 @@
 export default {
-  plugins: ['@trivago/prettier-plugin-sort-imports'],
+  plugins: ['prettier-plugin-organize-imports'],
   printWidth: 100,
   useTabs: false,
   tabWidth: 2,
   singleQuote: true,
   semi: false,
-  importOrder: [
-    '^node:(.*)$',
-    '<THIRD_PARTY_MODULES>',
-    '^#(.*)$',
-    '^@(.*)$',
-    '^@/(.*)$',
-    '^~/(.*)$',
-    '^[/]',
-    '^[./]',
-  ],
-  importOrderSeparation: true,
-  importOrderSortSpecifiers: true,
-  importOrderCaseInsensitive: true,
+  trailingComma: 'all',
+  arrowParens: 'always',
+  endOfLine: 'lf',
+  // Disable removal of unused imports by default (set to false to enable removal)
+  organizeImportsSkipDestructiveCodeActions: true,
 }

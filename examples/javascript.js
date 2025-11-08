@@ -1,12 +1,22 @@
-import abc from 'a'
-import { a, b, c } from 'b'
-import bcd from 'c'
+import { formatDate } from '@/utils/date'
+import axios from 'axios'
+import { useState } from 'react'
+import { Button } from '~/components/Button'
+import { parseJSON } from '../helpers/json'
 
-import abcd from '../d'
-import bcde from '../e'
-
-const variableName = abcd({ name: 'abcd', age: 20 })
+const variableName = parseJSON({ name: 'abcd', age: 20 })
 
 function exampleFunction() {
-  return variableName
+  const [data, setData] = useState(null)
+
+  axios.get('/api/data').then((response) => {
+    setData(response.data)
+  })
+
+  return (
+    <div>
+      <Button>{formatDate(new Date())}</Button>
+      {variableName}
+    </div>
+  )
 }
