@@ -145,6 +145,8 @@ describe('HTML Attribute Sorting', () => {
 
     // Check that class comes first, then id, then data-, then aria-
     const attributeOrder = output.match(/(class|id|data-\w+|aria-\w+|onclick)=/g)
+    expect(attributeOrder).toBeDefined()
+    expect(attributeOrder.length).toBeGreaterThanOrEqual(3)
     expect(attributeOrder[0]).toContain('class')
     expect(attributeOrder[1]).toContain('id')
     expect(attributeOrder[2]).toContain('data-')
