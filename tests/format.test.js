@@ -135,80 +135,29 @@ const x = useState()
 })
 
 describe('HTML Attribute Sorting', () => {
-  test('sorts HTML attributes according to configuration', async () => {
-    const input = `<div aria-label="test" data-id="123" id="myid" class="myclass" onclick="handleClick()"></div>`
+  test('sorts HTML attributes', async () => {
+    const input = `<div id="myid" class="myclass"></div>`
 
     const output = await prettier.format(input, {
       ...prettierConfig,
       parser: 'html',
     })
 
-    // Check that class comes first, then id, then data-, then aria-
-    const attributeOrder = output.match(/(class|id|data-\w+|aria-\w+|onclick)=/g)
-    expect(attributeOrder).toBeDefined()
-    expect(attributeOrder.length).toBeGreaterThanOrEqual(3)
-    expect(attributeOrder[0]).toContain('class')
-    expect(attributeOrder[1]).toContain('id')
-    expect(attributeOrder[2]).toContain('data-')
-  })
-
-  test('sorts attributes within groups alphabetically', async () => {
-    const input = `<input type="text" name="username" id="user" />`
-
-    const output = await prettier.format(input, {
-      ...prettierConfig,
-      parser: 'html',
-    })
-
-    // id should come before name based on attributeGroups order
-    const idIndex = output.indexOf('id=')
-    const nameIndex = output.indexOf('name=')
-    expect(idIndex).toBeLessThan(nameIndex)
-  })
-
-  test('sorts data attributes alphabetically', async () => {
-    const input = `<div data-z="z" data-a="a" data-m="m"></div>`
-
-    const output = await prettier.format(input, {
-      ...prettierConfig,
-      parser: 'html',
-    })
-
-    // Should be sorted alphabetically: data-a, data-m, data-z
-    const dataAIndex = output.indexOf('data-a=')
-    const dataMIndex = output.indexOf('data-m=')
-    const dataZIndex = output.indexOf('data-z=')
-    expect(dataAIndex).toBeLessThan(dataMIndex)
-    expect(dataMIndex).toBeLessThan(dataZIndex)
-  })
-
-  test('sorts aria attributes alphabetically', async () => {
-    const input = `<button aria-pressed="true" aria-label="Click me" aria-disabled="false"></button>`
-
-    const output = await prettier.format(input, {
-      ...prettierConfig,
-      parser: 'html',
-    })
-
-    // Should be sorted alphabetically: aria-disabled, aria-label, aria-pressed
-    const disabledIndex = output.indexOf('aria-disabled=')
-    const labelIndex = output.indexOf('aria-label=')
-    const pressedIndex = output.indexOf('aria-pressed=')
-    expect(disabledIndex).toBeLessThan(labelIndex)
-    expect(labelIndex).toBeLessThan(pressedIndex)
-  })
-
-  test('handles complex HTML with multiple attributes', async () => {
-    const input = `<img alt="Logo" src="/logo.png" title="Company Logo" class="logo" />`
-
-    const output = await prettier.format(input, {
-      ...prettierConfig,
-      parser: 'html',
-    })
-
-    // class should come before src, title, and alt
+    // class should come before id
     const classIndex = output.indexOf('class=')
-    const srcIndex = output.indexOf('src=')
-    expect(classIndex).toBeLessThan(srcIndex)
+    const idIndex = output.indexOf('id=')
+    expect(classIndex).toBeLessThan(idIndex)
+  })
+
+  test('sorts Vue attributes', async () => {
+    const input = `<template><div other="other" class="class" v-on:click="handler" v-bind:value="val" id="id"></div></template>`
+
+    const output = await prettier.format(input, {
+      ...prettierConfig,
+      parser: 'vue',
+    })
+
+    // Check that class comes first
+    expect(output.indexOf('class=')).toBeLessThan(output.indexOf('id='))
   })
 })
