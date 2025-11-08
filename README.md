@@ -103,17 +103,6 @@ export default {
 }
 ```
 
-**Pro tip:** Use environment-based configuration:
-
-```js
-import reqprettierConfig from 'reqprettier'
-
-export default {
-  ...reqprettierConfig,
-  organizeImportsSkipDestructiveCodeActions: process.env.NODE_ENV === 'development',
-}
-```
-
 ### Ignore Files
 
 To skip formatting for specific files, add a comment at the top:
