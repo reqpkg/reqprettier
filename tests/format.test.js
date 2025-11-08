@@ -143,10 +143,7 @@ describe('HTML Attribute Sorting', () => {
       parser: 'html',
     })
 
-    // class should come before id
-    const classIndex = output.indexOf('class=')
-    const idIndex = output.indexOf('id=')
-    expect(classIndex).toBeLessThan(idIndex)
+    expect(output).toBe(`<div class="myclass" id="myid"></div>\n`)
   })
 
   test('sorts Vue attributes', async () => {
@@ -157,7 +154,8 @@ describe('HTML Attribute Sorting', () => {
       parser: 'vue',
     })
 
-    // Check that class comes first
-    expect(output.indexOf('class=')).toBeLessThan(output.indexOf('id='))
+    expect(output).toBe(
+      `<template>\n  <div class="class" id="id" v-on:click="handler" v-bind:value="val" other="other"></div>\n</template>\n`,
+    )
   })
 })
