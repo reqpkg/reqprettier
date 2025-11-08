@@ -1,5 +1,5 @@
 export default {
-  plugins: ['prettier-plugin-organize-imports'],
+  plugins: ['prettier-plugin-organize-imports', 'prettier-plugin-css-order'],
   printWidth: 100,
   useTabs: false,
   tabWidth: 2,

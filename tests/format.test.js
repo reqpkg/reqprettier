@@ -1,5 +1,5 @@
-import { describe, expect, test } from 'vitest'
 import * as prettier from 'prettier'
+import { describe, expect, test } from 'vitest'
 import prettierConfig from '../prettier.config.js'
 
 describe('Prettier Formatting', () => {
@@ -131,5 +131,69 @@ const x = useState()
   age: number
 }
 `)
+  })
+})
+
+describe('CSS Property Sorting', () => {
+  test('sorts CSS properties in correct order', async () => {
+    const input = `.example {
+  margin: 0;
+  display: flex;
+  position: relative;
+  padding: 10px;
+  color: blue;
+}`
+
+    const output = await prettier.format(input, {
+      ...prettierConfig,
+      parser: 'css',
+      filepath: 'test.css',
+    })
+
+    // Properties should be sorted with positioning/layout first, then box model, then visual
+    const lines = output.trim().split('\n')
+    expect(lines[1].trim()).toContain('display:')
+    expect(lines[2].trim()).toContain('position:')
+    // Margin and padding come after display/position
+    expect(output.indexOf('margin')).toBeGreaterThan(output.indexOf('position'))
+    expect(output.indexOf('color')).toBeGreaterThan(output.indexOf('padding'))
+  })
+
+  test('handles SCSS syntax', async () => {
+    const input = `.button {
+  color: white;
+  background: blue;
+  padding: 10px;
+  display: block;
+}`
+
+    const output = await prettier.format(input, {
+      ...prettierConfig,
+      parser: 'scss',
+      filepath: 'test.scss',
+    })
+
+    // Display should come before padding and background
+    expect(output.indexOf('display')).toBeLessThan(output.indexOf('padding'))
+    expect(output.indexOf('display')).toBeLessThan(output.indexOf('background'))
+  })
+
+  test('preserves CSS formatting with sorted properties', async () => {
+    const input = `.card {
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  position: relative;
+}`
+
+    const output = await prettier.format(input, {
+      ...prettierConfig,
+      parser: 'css',
+      filepath: 'test.css',
+    })
+
+    // Position should come before padding and border
+    expect(output.indexOf('position')).toBeLessThan(output.indexOf('padding'))
+    expect(output.indexOf('position')).toBeLessThan(output.indexOf('border-radius'))
   })
 })
