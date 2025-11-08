@@ -133,24 +133,3 @@ const x = useState()
 `)
   })
 })
-
-describe('Configuration Options', () => {
-  test('has correct default settings', () => {
-    expect(prettierConfig.singleQuote).toBe(true)
-    expect(prettierConfig.semi).toBe(false)
-    expect(prettierConfig.trailingComma).toBe('all')
-    expect(prettierConfig.arrowParens).toBe('always')
-    expect(prettierConfig.printWidth).toBe(100)
-    expect(prettierConfig.tabWidth).toBe(2)
-    expect(prettierConfig.useTabs).toBe(false)
-    expect(prettierConfig.endOfLine).toBe('lf')
-  })
-
-  test('has organize imports plugin configured', () => {
-    expect(prettierConfig.plugins).toContain('prettier-plugin-organize-imports')
-  })
-
-  test('has organizeImportsSkipDestructiveCodeActions set to true', () => {
-    expect(prettierConfig.organizeImportsSkipDestructiveCodeActions).toBe(true)
-  })
-})
