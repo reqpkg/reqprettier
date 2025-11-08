@@ -1,7 +1,7 @@
 {
   "name": "reqprettier",
   "version": "2.0.0",
-  "description": "✨ Prettier with a production-ready configuration and automatic import organization",
+  "description": "✨ Prettier with a production-ready configuration, automatic import organization, and CSS property sorting",
   "main": "prettier.config.js",
   "types": "./index.d.ts",
   "files": [
@@ -32,11 +32,17 @@
     "import-sort",
     "prettier-config",
     "typescript",
-    "javascript"
+    "javascript",
+    "css",
+    "scss",
+    "less",
+    "css-sort",
+    "css-order"
   ],
   "license": "MIT",
   "dependencies": {
     "prettier": "^3.3.3",
+    "prettier-plugin-css-order": "^2.1.2",
     "prettier-plugin-organize-attributes": "^1.0.0",
     "prettier-plugin-organize-imports": "^4.3.0"
   },
