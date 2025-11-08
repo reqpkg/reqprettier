@@ -6,8 +6,8 @@
 
 - ⬆️ **Upgraded to Prettier 3.3.3** - Latest stable version
 - 🔄 **New import organizer** - Switched to `prettier-plugin-organize-imports` (uses TypeScript's built-in organizer)
-- 🧹 **Auto-cleanup** - Automatically removes unused imports (configurable)
-- ⚙️ **Configurable import removal** - Use `organizeImportsSkipDestructiveCodeActions` to control unused import removal
+- 📦 **Smart import organization** - Sorts and organizes imports alphabetically
+- ⚙️ **Configurable import removal** - Optionally enable unused import removal via `organizeImportsSkipDestructiveCodeActions`
 - 🏷️ **Better TypeScript support** - Proper handling of `type` imports
 - 🎯 **Modern defaults** - Updated configuration for 2025 best practices
   - `trailingComma: 'all'` - Better git diffs
@@ -65,8 +65,8 @@ import reqprettierConfig from 'reqprettier'
 export default {
   ...reqprettierConfig,
   singleQuote: false,
-  // Disable unused imports removal during development
-  organizeImportsSkipDestructiveCodeActions: true,
+  // Optionally enable unused import removal (disabled by default)
+  // organizeImportsSkipDestructiveCodeActions: false,
 }
 ```
 
@@ -74,7 +74,8 @@ export default {
 
 - **Automatic code formatting** with sensible defaults
 - **Automatic import organization** using TypeScript's built-in organizer
-- **Removes unused imports** automatically
+- **Alphabetical import sorting** for consistency
+- **Optional unused import removal** (disabled by default)
 - **Modern Prettier 3.x** configuration
 - **Production-ready settings** for 2025 and beyond
 
@@ -82,24 +83,24 @@ export default {
 
 ### `organizeImportsSkipDestructiveCodeActions`
 
-**Type:** `boolean` (default: `false`)
+**Type:** `boolean` (default: `true`)
 
 Controls whether unused imports are automatically removed.
 
-- **`false` (default)** - Removes unused imports automatically (recommended for production)
-- **`true`** - Only sorts imports, keeps unused ones (useful during active development)
+- **`true` (default)** - Only sorts imports, keeps unused ones (safe, non-disruptive)
+- **`false`** - Removes unused imports automatically (use with caution)
 
-**Why this matters:** During development, you often add imports before using them. Auto-removal can be disruptive. Enable this flag while coding, disable for production/CI.
+**Why disabled by default:** During development, you often add imports before using them. Auto-removal can be disruptive to the workflow. If you want aggressive cleanup, you can enable it:
 
-**Example:**
+**Example - Enable unused import removal:**
 
 ```js
 import reqprettierConfig from 'reqprettier'
 
 export default {
   ...reqprettierConfig,
-  // Enable during development to prevent import removal
-  organizeImportsSkipDestructiveCodeActions: true,
+  // Enable automatic removal of unused imports
+  organizeImportsSkipDestructiveCodeActions: false,
 }
 ```
 
@@ -125,9 +126,9 @@ or
 
 1. ✨ Formats code consistently
 2. 📦 Organizes and sorts imports automatically (alphabetically)
-3. 🧹 Removes unused imports
-4. 🏷️ Properly handles TypeScript `type` imports
-5. 🎯 Groups imports intelligently
+3. 🏷️ Properly handles TypeScript `type` imports
+4. 🎯 Groups imports intelligently
+5. 🔧 Optional: Remove unused imports (configurable)
 
 **Check out examples:**
 

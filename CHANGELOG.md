@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 🔄 **BREAKING**: Replaced `@trivago/prettier-plugin-sort-imports` with `prettier-plugin-organize-imports`
   - Now uses TypeScript's built-in import organizer
   - Alphabetical sorting instead of custom import order
-  - Automatic removal of unused imports
+  - Optional unused import removal (disabled by default)
 - 📝 **BREAKING**: Updated default configuration:
   - Added `trailingComma: 'all'` for better git diffs
   - Added `arrowParens: 'always'` for TypeScript compatibility
@@ -24,11 +24,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- ✨ Automatic unused import removal
+- 📦 Automatic alphabetical import sorting
 - ⚙️ **`organizeImportsSkipDestructiveCodeActions`** configuration option
   - Control whether unused imports are removed
-  - Set to `true` during development to keep unused imports
-  - Default: `false` (removes unused imports)
+  - Default: `true` (keeps unused imports - safe, non-disruptive)
+  - Set to `false` to enable aggressive cleanup of unused imports
 - 🏷️ Better TypeScript `type` import handling
 - 📚 TypeScript example file (examples/typescript.tsx)
 - 📋 Project requirements documentation
