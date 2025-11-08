@@ -1,6 +1,23 @@
 # ✨ reqprettier
 
-[Prettier](https://prettier.io) with fully customised configuration for use in any project. Don't hesitate and get your project up and running quickly with Prettier ready.
+[Prettier](https://prettier.io) with production-ready configuration and automatic import organization for modern JavaScript and TypeScript projects.
+
+## 🆕 What's New in v2.0
+
+- ⬆️ **Upgraded to Prettier 3.3.3** - Latest stable version
+- 🔄 **New import organizer** - Switched to `prettier-plugin-organize-imports` (uses TypeScript's built-in organizer)
+- 🧹 **Auto-cleanup** - Automatically removes unused imports
+- 🏷️ **Better TypeScript support** - Proper handling of `type` imports
+- 🎯 **Modern defaults** - Updated configuration for 2025 best practices
+  - `trailingComma: 'all'` - Better git diffs
+  - `arrowParens: 'always'` - TypeScript compatibility
+  - `endOfLine: 'lf'` - Cross-platform consistency
+
+## 📋 Requirements
+
+- **TypeScript projects**: Requires `tsconfig.json` in your project root
+- **JavaScript projects**: Works with `allowJs: true` in tsconfig
+- **Node.js**: v16 or higher recommended
 
 - [✨ reqprettier](#-reqprettier)
   - [How to use](#how-to-use)
@@ -50,12 +67,30 @@ export default {
 }
 ```
 
+## Features
+
+- **Automatic code formatting** with sensible defaults
+- **Automatic import organization** using TypeScript's built-in organizer
+- **Removes unused imports** automatically
+- **Modern Prettier 3.x** configuration
+- **Production-ready settings** for 2025 and beyond
+
 ## Examples
 
-### Javascript
+### Javascript/TypeScript
 
-1. Format code
-2. Sorts and separates imports
+**What it does:**
+
+1. ✨ Formats code consistently
+2. 📦 Organizes and sorts imports automatically (alphabetically)
+3. 🧹 Removes unused imports
+4. 🏷️ Properly handles TypeScript `type` imports
+5. 🎯 Groups imports intelligently
+
+**Check out examples:**
+
+- [JavaScript example](./examples/javascript.js)
+- [TypeScript example](./examples/typescript.tsx)
 
 <table width="100%">
   <thead>
