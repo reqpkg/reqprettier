@@ -1,5 +1,5 @@
-import { describe, expect, test } from 'vitest'
 import * as prettier from 'prettier'
+import { describe, expect, test } from 'vitest'
 import prettierConfig from '../prettier.config.js'
 
 describe('Prettier Formatting', () => {
@@ -131,5 +131,33 @@ const x = useState()
   age: number
 }
 `)
+  })
+})
+
+describe('HTML Attribute Sorting', () => {
+  test('sorts HTML attributes', async () => {
+    const input = `<div id="myid" class="myclass"></div>`
+
+    const output = await prettier.format(input, {
+      ...prettierConfig,
+      parser: 'html',
+    })
+
+    // class should come before id
+    const classIndex = output.indexOf('class=')
+    const idIndex = output.indexOf('id=')
+    expect(classIndex).toBeLessThan(idIndex)
+  })
+
+  test('sorts Vue attributes', async () => {
+    const input = `<template><div other="other" class="class" v-on:click="handler" v-bind:value="val" id="id"></div></template>`
+
+    const output = await prettier.format(input, {
+      ...prettierConfig,
+      parser: 'vue',
+    })
+
+    // Check that class comes first
+    expect(output.indexOf('class=')).toBeLessThan(output.indexOf('id='))
   })
 })
