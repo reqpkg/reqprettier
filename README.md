@@ -62,3 +62,47 @@ export default {
     </td>
   </tbody>
 </table>
+
+### HTML Attribute Sorting
+
+Automatically sorts HTML attributes in a consistent order (class, id, data-\*, aria-\*, etc.)
+
+**Before:**
+
+```text
+<div id="container" class="card" data-value="123" aria-label="Card">
+  <button type="submit" onclick="submit()" class="btn" id="btn">Submit</button>
+</div>
+```
+
+**After:**
+
+```html
+<div class="card" id="container" data-value="123" aria-label="Card">
+  <button class="btn" id="btn" type="submit" onclick="submit()">Submit</button>
+</div>
+```
+
+### Vue Template Support
+
+Handles Vue directives (v-bind, v-on, v-model, etc.) automatically
+
+**Before:**
+
+```text
+<template>
+  <div id="app" v-if="show" class="app" @click="handleClick" :data="myData">
+    <input type="text" v-model="value" class="input" id="userInput" />
+  </div>
+</template>
+```
+
+**After:**
+
+```vue
+<template>
+  <div class="app" id="app" v-if="show" @click="handleClick" :data="myData">
+    <input class="input" id="userInput" v-model="value" type="text" />
+  </div>
+</template>
+```
