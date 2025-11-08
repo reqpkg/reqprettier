@@ -7,7 +7,7 @@ import { parseJSON } from '../helpers/json'
 const variableName = parseJSON({ name: 'abcd', age: 20 })
 
 function exampleFunction() {
-  const [data, setData] = useState(null)
+  const [, setData] = useState(null)
 
   axios.get('/api/data').then((response) => {
     setData(response.data)

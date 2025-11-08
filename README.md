@@ -62,4 +62,3 @@ export default {
     </td>
   </tbody>
 </table>
-
