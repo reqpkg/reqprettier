@@ -25,10 +25,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - ✨ Automatic unused import removal
+- ⚙️ **`organizeImportsSkipDestructiveCodeActions`** configuration option
+  - Control whether unused imports are removed
+  - Set to `true` during development to keep unused imports
+  - Default: `false` (removes unused imports)
 - 🏷️ Better TypeScript `type` import handling
 - 📚 TypeScript example file (examples/typescript.tsx)
 - 📋 Project requirements documentation
 - 📝 CHANGELOG file
+- 🚫 Documentation for ignoring files with comments
 
 ### Improved
 

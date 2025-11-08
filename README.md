@@ -6,7 +6,8 @@
 
 - ⬆️ **Upgraded to Prettier 3.3.3** - Latest stable version
 - 🔄 **New import organizer** - Switched to `prettier-plugin-organize-imports` (uses TypeScript's built-in organizer)
-- 🧹 **Auto-cleanup** - Automatically removes unused imports
+- 🧹 **Auto-cleanup** - Automatically removes unused imports (configurable)
+- ⚙️ **Configurable import removal** - Use `organizeImportsSkipDestructiveCodeActions` to control unused import removal
 - 🏷️ **Better TypeScript support** - Proper handling of `type` imports
 - 🎯 **Modern defaults** - Updated configuration for 2025 best practices
   - `trailingComma: 'all'` - Better git diffs
@@ -64,6 +65,8 @@ import reqprettierConfig from 'reqprettier'
 export default {
   ...reqprettierConfig,
   singleQuote: false,
+  // Disable unused imports removal during development
+  organizeImportsSkipDestructiveCodeActions: true,
 }
 ```
 
@@ -74,6 +77,56 @@ export default {
 - **Removes unused imports** automatically
 - **Modern Prettier 3.x** configuration
 - **Production-ready settings** for 2025 and beyond
+
+## ⚙️ Configuration Options
+
+### `organizeImportsSkipDestructiveCodeActions`
+
+**Type:** `boolean` (default: `false`)
+
+Controls whether unused imports are automatically removed.
+
+- **`false` (default)** - Removes unused imports automatically (recommended for production)
+- **`true`** - Only sorts imports, keeps unused ones (useful during active development)
+
+**Why this matters:** During development, you often add imports before using them. Auto-removal can be disruptive. Enable this flag while coding, disable for production/CI.
+
+**Example:**
+
+```js
+import reqprettierConfig from 'reqprettier'
+
+export default {
+  ...reqprettierConfig,
+  // Enable during development to prevent import removal
+  organizeImportsSkipDestructiveCodeActions: true,
+}
+```
+
+**Pro tip:** Use environment-based configuration:
+
+```js
+import reqprettierConfig from 'reqprettier'
+
+export default {
+  ...reqprettierConfig,
+  organizeImportsSkipDestructiveCodeActions: process.env.NODE_ENV === 'development',
+}
+```
+
+### Ignore Files
+
+To skip formatting for specific files, add a comment at the top:
+
+```js
+// organize-imports-ignore
+```
+
+or
+
+```js
+// tslint:disable:ordered-imports
+```
 
 ## Examples
 

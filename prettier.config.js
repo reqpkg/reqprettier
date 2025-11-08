@@ -8,4 +8,6 @@ export default {
   trailingComma: 'all',
   arrowParens: 'always',
   endOfLine: 'lf',
+  // Set to true to disable removal of unused imports (useful during development)
+  organizeImportsSkipDestructiveCodeActions: false,
 }
