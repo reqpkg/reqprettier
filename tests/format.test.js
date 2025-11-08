@@ -150,13 +150,14 @@ describe('CSS Property Sorting', () => {
       filepath: 'test.css',
     })
 
-    // Properties should be sorted with positioning/layout first, then box model, then visual
-    const lines = output.trim().split('\n')
-    expect(lines[1].trim()).toContain('display:')
-    expect(lines[2].trim()).toContain('position:')
-    // Margin and padding come after display/position
-    expect(output.indexOf('margin')).toBeGreaterThan(output.indexOf('position'))
-    expect(output.indexOf('color')).toBeGreaterThan(output.indexOf('padding'))
+    expect(output).toBe(`.example {
+  display: flex;
+  position: relative;
+  margin: 0;
+  padding: 10px;
+  color: blue;
+}
+`)
   })
 
   test('handles SCSS syntax', async () => {
@@ -173,9 +174,13 @@ describe('CSS Property Sorting', () => {
       filepath: 'test.scss',
     })
 
-    // Display should come before padding and background
-    expect(output.indexOf('display')).toBeLessThan(output.indexOf('padding'))
-    expect(output.indexOf('display')).toBeLessThan(output.indexOf('background'))
+    expect(output).toBe(`.button {
+  display: block;
+  background: blue;
+  padding: 10px;
+  color: white;
+}
+`)
   })
 
   test('preserves CSS formatting with sorted properties', async () => {
@@ -192,8 +197,12 @@ describe('CSS Property Sorting', () => {
       filepath: 'test.css',
     })
 
-    // Position should come before padding and border
-    expect(output.indexOf('position')).toBeLessThan(output.indexOf('padding'))
-    expect(output.indexOf('position')).toBeLessThan(output.indexOf('border-radius'))
+    expect(output).toBe(`.card {
+  position: relative;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 20px;
+}
+`)
   })
 })
