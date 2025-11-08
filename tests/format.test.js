@@ -1,5 +1,5 @@
-import { describe, expect, test } from 'vitest'
 import * as prettier from 'prettier'
+import { describe, expect, test } from 'vitest'
 import prettierConfig from '../prettier.config.js'
 
 describe('Prettier Formatting', () => {
@@ -129,6 +129,79 @@ const x = useState()
     expect(output).toBe(`interface User {
   name: string
   age: number
+}
+`)
+  })
+})
+
+describe('CSS Property Sorting', () => {
+  test('sorts CSS properties in correct order', async () => {
+    const input = `.example {
+  margin: 0;
+  display: flex;
+  position: relative;
+  padding: 10px;
+  color: blue;
+}`
+
+    const output = await prettier.format(input, {
+      ...prettierConfig,
+      parser: 'css',
+      filepath: 'test.css',
+    })
+
+    expect(output).toBe(`.example {
+  display: flex;
+  position: relative;
+  margin: 0;
+  padding: 10px;
+  color: blue;
+}
+`)
+  })
+
+  test('handles SCSS syntax', async () => {
+    const input = `.button {
+  color: white;
+  background: blue;
+  padding: 10px;
+  display: block;
+}`
+
+    const output = await prettier.format(input, {
+      ...prettierConfig,
+      parser: 'scss',
+      filepath: 'test.scss',
+    })
+
+    expect(output).toBe(`.button {
+  display: block;
+  background: blue;
+  padding: 10px;
+  color: white;
+}
+`)
+  })
+
+  test('preserves CSS formatting with sorted properties', async () => {
+    const input = `.card {
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  position: relative;
+}`
+
+    const output = await prettier.format(input, {
+      ...prettierConfig,
+      parser: 'css',
+      filepath: 'test.css',
+    })
+
+    expect(output).toBe(`.card {
+  position: relative;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 20px;
 }
 `)
   })

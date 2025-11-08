@@ -1,6 +1,6 @@
 # ✨ reqprettier
 
-[Prettier](https://prettier.io) with production-ready configuration and automatic import organization for modern JavaScript and TypeScript projects.
+[Prettier](https://prettier.io) with production-ready configuration and automatic import organization for modern JavaScript, TypeScript, and CSS projects.
 
 ## How to use
 
@@ -63,3 +63,9 @@ export default {
   </tbody>
 </table>
 
+### CSS/SCSS/Less
+
+1. Formats CSS consistently
+2. Automatically sorts CSS properties in a logical order
+
+This helps maintain consistency across stylesheets and makes code reviews easier by reducing arbitrary differences in property ordering.
