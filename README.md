@@ -41,6 +41,47 @@ export default {
 }
 ```
 
+## Features
+
+### Import Organization
+
+Automatically organizes and sorts imports in JavaScript and TypeScript files.
+
+### HTML Attribute Sorting
+
+Automatically sorts HTML attributes in a consistent, logical order:
+
+1. `class` - Styling class names
+2. `id` - Element identifier
+3. `name` - Form element name
+4. `data-*` - Data attributes (sorted alphabetically)
+5. `src` - Source URL
+6. `for` - Label association
+7. `type` - Input/button type
+8. `href` - Link URL
+9. `value` - Input value
+10. `title` - Tooltip text
+11. `alt` - Alternative text
+12. `role` - ARIA role
+13. `aria-*` - ARIA attributes (sorted alphabetically)
+14. Other attributes (sorted alphabetically)
+
+This works for:
+
+- `.html` files
+- `.vue` files (Vue components)
+- `.component.html` files (Angular components)
+
+**Example:**
+
+```html
+<!-- Before -->
+<div class="container" id="main" data-value="123" aria-label="Test" onclick="test()">Content</div>
+
+<!-- After -->
+<div class="container" id="main" data-value="123" aria-label="Test" onclick="test()">Content</div>
+```
+
 ## Examples
 
 ### Javascript/TypeScript
@@ -62,4 +103,3 @@ export default {
     </td>
   </tbody>
 </table>
-

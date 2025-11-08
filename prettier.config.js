@@ -1,5 +1,5 @@
 export default {
-  plugins: ['prettier-plugin-organize-imports'],
+  plugins: ['prettier-plugin-organize-imports', 'prettier-plugin-organize-attributes'],
   printWidth: 100,
   useTabs: false,
   tabWidth: 2,
@@ -10,4 +10,22 @@ export default {
   endOfLine: 'lf',
   // Disable removal of unused imports by default (set to false to enable removal)
   organizeImportsSkipDestructiveCodeActions: true,
+  // HTML attribute sorting configuration
+  attributeGroups: [
+    '^class$',
+    '^id$',
+    '^name$',
+    '^data-',
+    '^src$',
+    '^for$',
+    '^type$',
+    '^href$',
+    '^value$',
+    '^title$',
+    '^alt$',
+    '^role$',
+    '^aria-',
+    '$DEFAULT',
+  ],
+  attributeSort: 'ASC',
 }
