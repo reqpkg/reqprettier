@@ -14,4 +14,6 @@ export default {
   endOfLine: 'lf',
   // Disable removal of unused imports by default (set to false to enable removal)
   organizeImportsSkipDestructiveCodeActions: true,
+  // Vue directives should come first
+  attributeGroups: ['^v-', '^:', '^@', '^class$', '^id$', '$DEFAULT'],
 }
