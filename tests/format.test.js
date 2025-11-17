@@ -206,3 +206,128 @@ describe('CSS Property Sorting', () => {
 `)
   })
 })
+
+describe('HTML Attribute Sorting', () => {
+  test('sorts HTML attributes alphabetically', async () => {
+    const input = `<div id="test" class="container" data-value="123" role="main"></div>`
+
+    const output = await prettier.format(input, {
+      ...prettierConfig,
+      parser: 'html',
+      filepath: 'test.html',
+    })
+
+    expect(output).toBe(
+      `<div class="container" data-value="123" id="test" role="main"></div>\n`,
+    )
+  })
+
+  test('sorts Vue v- directives to the top', async () => {
+    const input = `<div id="app" class="wrapper" v-if="show" v-model="value" @click="handle"></div>`
+
+    const output = await prettier.format(input, {
+      ...prettierConfig,
+      parser: 'vue',
+      filepath: 'test.vue',
+    })
+
+    // v- directives should be at the top
+    const lines = output.trim().split('\n')
+    const attributes = lines[0].match(/(\w+[-:]?\w*)=/g) || []
+
+    // First attributes should start with v-
+    expect(attributes[0]).toMatch(/^v-/)
+    expect(attributes[1]).toMatch(/^v-/)
+  })
+
+  test('sorts Vue @ event handlers to the bottom', async () => {
+    const input = `<button @click="submit" class="btn" type="button" @mouseenter="hover" id="btn"></button>`
+
+    const output = await prettier.format(input, {
+      ...prettierConfig,
+      parser: 'vue',
+      filepath: 'test.vue',
+    })
+
+    // @ handlers should be at the bottom
+    const attributesMatch = output.match(/<button\s+([^>]+)>/s)
+    const attributesText = attributesMatch ? attributesMatch[1] : ''
+
+    // Check that @ attributes come after regular attributes
+    const classPos = attributesText.indexOf('class')
+    const clickPos = attributesText.indexOf('@click')
+    const mouseenterPos = attributesText.indexOf('@mouseenter')
+
+    expect(classPos).toBeLessThan(clickPos)
+    expect(classPos).toBeLessThan(mouseenterPos)
+  })
+
+  test('sorts Vue attributes with all three groups: v-, regular, @', async () => {
+    const input = `<div @click="handle" class="box" v-if="visible" :key="id" id="container" @input="onInput" v-show="show"></div>`
+
+    const output = await prettier.format(input, {
+      ...prettierConfig,
+      parser: 'vue',
+      filepath: 'test.vue',
+    })
+
+    const attributesMatch = output.match(/<div\s+([^>]+)>/s)
+    const attributesText = attributesMatch ? attributesMatch[1] : ''
+
+    // Check order: v- directives first, then : shorthand, then regular, then @ handlers
+    const vIfPos = attributesText.indexOf('v-if')
+    const vShowPos = attributesText.indexOf('v-show')
+    const keyPos = attributesText.indexOf(':key')
+    const classPos = attributesText.indexOf('class')
+    const idPos = attributesText.indexOf('id')
+    const clickPos = attributesText.indexOf('@click')
+    const inputPos = attributesText.indexOf('@input')
+
+    // v- directives should be first
+    expect(vIfPos).toBeGreaterThan(-1)
+    expect(vShowPos).toBeGreaterThan(-1)
+    expect(vIfPos).toBeLessThan(classPos)
+    expect(vShowPos).toBeLessThan(classPos)
+
+    // : shorthand should come after v- directives
+    expect(keyPos).toBeGreaterThan(-1)
+    expect(keyPos).toBeGreaterThan(vIfPos)
+
+    // Regular attributes in the middle
+    expect(classPos).toBeGreaterThan(-1)
+    expect(idPos).toBeGreaterThan(-1)
+
+    // @ handlers should be last
+    expect(clickPos).toBeGreaterThan(classPos)
+    expect(inputPos).toBeGreaterThan(idPos)
+  })
+
+  test('handles complex Vue component with mixed attributes', async () => {
+    const input = `<input 
+      type="text" 
+      @input="handleInput" 
+      v-model="username" 
+      :value="val" 
+      class="form-control" 
+      id="user" 
+      @focus="onFocus"
+    />`
+
+    const output = await prettier.format(input, {
+      ...prettierConfig,
+      parser: 'vue',
+      filepath: 'test.vue',
+    })
+
+    // Parse the formatted output
+    const lines = output.trim().split('\n')
+
+    // v-model should appear early (v- directives at top)
+    const vModelLine = lines.findIndex((line) => line.includes('v-model'))
+    const classLine = lines.findIndex((line) => line.includes('class='))
+    const inputLine = lines.findIndex((line) => line.includes('@input'))
+
+    expect(vModelLine).toBeLessThan(classLine)
+    expect(classLine).toBeLessThan(inputLine)
+  })
+})
